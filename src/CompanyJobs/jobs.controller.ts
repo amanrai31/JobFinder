@@ -1,24 +1,30 @@
-import { Controller, Post, Body, Get, Delete, Query} from "@nestjs/common";                              
+import { Controller, Post, Body, Get, Delete, Param, Patch } from "@nestjs/common";                              
 import { JobsService } from "./jobs.service";
-import { Job } from "./jobDto";
+import { Job } from "./dto/jobDto";
 
-@Controller('jobs')
+@Controller('/jobFinder/jobs')
 export class JobsController{
 
     constructor(private readonly jobsService: JobsService) {}
 
-    @Post("add")
-    addJob(@Body() jobDto : Job): any {                                                                                                      // converts JSON to JS object
-     return this.jobsService.insertJob(jobDto.title,jobDto.location,jobDto.jobid);
-    }
-    @Get("get")
+    @Get("/get")
     getAllJobs(){
         return this.jobsService.getJobs();
     }
 
-    
-    @Delete("delete")
-    delJobs(@Query("id") id: number) {                                                                                                      // converts JSON to JS object
-        return this.jobsService.deleteEntryById(id)                                                                                                               // dought--- 39min
+    @Post("/add")
+    addJob(@Body() jobDto : Job): any {                                                                                                      // converts JSON to JS object
+     return this.jobsService.insertJob(jobDto);
     }
+
+    @Delete('/delete/:id')
+    deleteJob(@Param('id')id:string){
+     return this.jobsService.deleteJob(+id);
+    }
+
+    // @Patch('/updateJob/:id')
+    // updateJob(@Param('id')id:string){
+    //     return this.jobsService.updateJob(+id);
+    // }
+  
 }

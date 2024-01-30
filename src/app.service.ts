@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
 
   getHello(): string {
-    return 'Hello Aman!!';
+      return `Welcome to JobFinder, let's explore the opportunity` 
   }
+
 }

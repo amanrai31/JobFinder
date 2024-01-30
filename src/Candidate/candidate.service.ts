@@ -1,25 +1,27 @@
 import { Injectable } from "@nestjs/common";
-import {Candidate} from './candidateDto';
+import {CandidateDto} from './dto/candidateDto';
+
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { Candidate } from "src/schema/candidate.schema";
 
 @Injectable()
 export class CandidateService{
 
-    private candidate: Candidate[] = [];
-
-    async insertCandidate(name:string, location:string, candidateId:number):Promise<Object>{
-        this.candidate.push({candidateId:candidateId,name:name,location:location});
-        console.log(this.candidate);
-        return  {
-          message:"Candidate profile added SUcessfully",
-          status:201
-        }
+    private candidate: CandidateDto[] = [];
+    
+    constructor(@InjectModel(Candidate.name) private candidateModel: Model<Candidate>){}
+    
+    async insertCandidate(candidate:CandidateDto){
+        this.candidate.push(candidate);
+        return candidate;
       }
-      getCandidate(){
+
+      getCandidate(){ 
         console.log(this.candidate);
         return[...this.candidate];
-        
       }
-      delCandidate(candidateId:number){
-        
+      delCandidate(id:number){
+        this.candidate=this.candidate.filter((user)=> user.candidateId!==id )
       }
 }

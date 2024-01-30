@@ -1,19 +1,24 @@
-import { Controller, Post, Body, Get, Delete, Query } from "@nestjs/common";
-
+import { Controller, Post, Body, Get, Delete, Query, Param, ValidationPipe, ParseIntPipe } from "@nestjs/common";
 import { CandidateService  } from "./candidate.service";
-import { Candidate } from "./candidateDto";
+import { CandidateDto } from "./dto/candidateDto";
 
-@Controller('candidate')
+@Controller('/jobFinder/candidate')
 export class CandidateController{
+
  constructor(private readonly candidateService : CandidateService){}
 
- @Post("add")
- addCandidate(@Body() candidateDto: Candidate): any {
-    return this.candidateService.insertCandidate(candidateDto.name,
-        candidateDto.location,candidateDto.candidateId);
- }
- @Get("get")
+ @Get("/get")
  getAllCandidate(){
     return this.candidateService.getCandidate();
  }
+
+ @Post("/add")
+ addCandidate(@Body(ValidationPipe) candidateDto: CandidateDto): any {
+    return this.candidateService.insertCandidate(candidateDto);
+ }
+ @Delete('/delete/:id')
+ delete(@Param('id')id:string){
+   this.candidateService.delCandidate(+id);
+}
+ 
 }
