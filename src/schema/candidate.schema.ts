@@ -4,12 +4,15 @@ import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 export class Candidate{
 
     @Prop({required:[true,'Custom error message: Name is required.']})
-    candidateName: string;
+    name: string;
 
     @Prop({required:true})
-    candidateLocation:string;
+    location:string;
 
     @Prop({required:true})
-    skills:[];
+    tags:[];
+
+    @Prop({required:true})
+    email: string;
 }
 export const CandidateSchema = SchemaFactory.createForClass(Candidate);

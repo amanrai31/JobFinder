@@ -1,16 +1,20 @@
-import { IsNotEmpty, IsString, IsOptional,  } from "class-validator";
+import { IsNotEmpty, IsString, IsOptional, IsEmail, } from "class-validator";
 
 export class CandidateDto{
 
-    candidateId:number;
-
+    // candidateId:number;
+    
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message: "Name cannot be empty"})
     name: string;
 
     @IsString()
     location: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message: "Skills tag cannot be empty"})
     tags:[];
+
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
 }

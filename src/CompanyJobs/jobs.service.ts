@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 
-import {Job} from './dto/jobDto';
+import {JobDto} from './dto/jobDto';
 import { CLIENT_RENEG_LIMIT } from "tls";
 
 @Injectable()
 export class JobsService{
 
-private jobs: Job[];                 // private jobs: Job[] = [];
+private jobs: JobDto[];                 // private jobs: Job[] = [];
 
 constructor()
 {
@@ -18,7 +18,7 @@ getJobs(){
   return [...this.jobs];                          // reference returns, that's why we can't simply return this.jobs
 }
 
-async insertJob(jobs:Job){   
+async insertJob(jobs:JobDto){   
   console.log(this.jobs)                    // :Promise<Object>
     this.jobs.push(jobs);
     return jobs;
@@ -30,7 +30,7 @@ async insertJob(jobs:Job){
    return this.jobs;
   }
 
-//   updateJob(id:number){
-
-//   }
+  updateJob(id:string){
+  
+  }
 }

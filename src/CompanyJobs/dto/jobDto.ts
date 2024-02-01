@@ -1,5 +1,5 @@
 
-export class Job{
+export class JobDto{
     jobid:number;
     title:string;
     location:string;

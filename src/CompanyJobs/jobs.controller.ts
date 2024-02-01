@@ -1,6 +1,13 @@
-import { Controller, Post, Body, Get, Delete, Param, Patch } from "@nestjs/common";                              
+import { Controller, 
+    Post, 
+    Body, 
+    Get, 
+    Delete, 
+    Param, 
+    Patch 
+} from "@nestjs/common";                              
 import { JobsService } from "./jobs.service";
-import { Job } from "./dto/jobDto";
+import { JobDto } from "./dto/jobDto";
 
 @Controller('/jobFinder/jobs')
 export class JobsController{
@@ -12,19 +19,22 @@ export class JobsController{
         return this.jobsService.getJobs();
     }
 
-    @Post("/add")
-    addJob(@Body() jobDto : Job): any {                                                                                                      // converts JSON to JS object
+    @Post("/addJob")
+    addJob(@Body() jobDto : JobDto): any {                                                                                                      // converts JSON to JS object
      return this.jobsService.insertJob(jobDto);
     }
 
-    @Delete('/delete/:id')
+    @Delete('/deleteJob/:id')
     deleteJob(@Param('id')id:string){
      return this.jobsService.deleteJob(+id);
     }
 
-    // @Patch('/updateJob/:id')
-    // updateJob(@Param('id')id:string){
-    //     return this.jobsService.updateJob(+id);
-    // }
+    @Patch('/updateJob/:id')
+    updateJob(@Param('id')id:string){
+        return this.jobsService.updateJob(id);
+    }
   
+
+    // JobProvider login, Auth
+    // addJob, deleteJob, updateJob, seeJobAdmin, 
 }
