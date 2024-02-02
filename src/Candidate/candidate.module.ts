@@ -5,7 +5,7 @@ import { CandidateService } from "./candidate.service";
 import { CandidateDto } from "./dto/candidateDto";
 
 import { MongooseModule } from "@nestjs/mongoose";
-import { Candidate ,CandidateSchema } from "src/schema/candidate.schema";
+import { Candidate ,CandidateSchema } from "src/schema/candidates.schema";
 
 
 @Module({

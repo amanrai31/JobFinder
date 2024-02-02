@@ -12,7 +12,7 @@ export class Candidate{
     @Prop({required:true})
     tags:[];
 
-    @Prop({required:true})
+    @Prop({required:true,unique:true})
     email: string;
 }
 export const CandidateSchema = SchemaFactory.createForClass(Candidate);

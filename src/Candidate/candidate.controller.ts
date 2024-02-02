@@ -44,17 +44,21 @@ export class CandidateController {
    }
 
    @Get("/myProfile/:id")
-   getCandidateById(@Param('id') id: string) {
+   async getCandidateById(@Param('id') id: string) {
       const isValid = mongoose.Types.ObjectId.isValid(id);
       if (!isValid) throw new HttpException('Candidate not valid', 400);
-      return this.candidateService.getCandidateById(id);
+      const fetchedCandidate= await this.candidateService.getCandidateById(id);
+      if(! fetchedCandidate) throw new HttpException('Candidate not fund',404);
+      return fetchedCandidate;
    }
 
    @Delete('/deleteMyProfile/:id')
-   delete(@Param('id') id: string) {
+   async delete(@Param('id') id: string) {
       const isValid = mongoose.Types.ObjectId.isValid(id);
-      if (!isValid) throw new HttpException('Candidate not valid', 400);
-      return this.candidateService.deleteCandidate(id);
+      if (!isValid) throw new HttpException("Candidate not valid", 400);
+      const deletedCandidate= await this.candidateService.deleteCandidate(id);
+      if(! deletedCandidate) throw new HttpException('Candidate not fund',404);
+      return deletedCandidate;
    }
 
 }

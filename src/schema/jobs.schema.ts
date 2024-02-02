@@ -10,6 +10,9 @@ export class Job{
     jobLocation:string;
 
     @Prop({required:true})
-    skillsNeed:[];
+    tags:[];
+
+    @Prop({required:true, unique:true})
+    email:string;
 }
 export const JobSchema = SchemaFactory.createForClass(Job);

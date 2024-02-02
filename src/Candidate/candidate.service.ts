@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 
 import {CandidateDto} from './dto/candidateDto';
 import { UpdateCandidateDto } from './dto/updateCandidateDto';
-import { Candidate } from "src/schema/candidate.schema";
+import { Candidate } from "src/schema/candidates.schema";
 
 @Injectable()
 export class CandidateService{
@@ -31,13 +31,13 @@ export class CandidateService{
      return this.candidateModel.findByIdAndUpdate(id, updateCandidate);
     }
 
-    getCandidateById(id:string){
+    async getCandidateById(id:string){
         // const candidateProfile= this.candidate.find((cp)=> cp.candidateId===id)
         const candidateProfile= this.candidateModel.findById(id);
         return candidateProfile;
      }
 
-    deleteCandidate(id:string){
+    async deleteCandidate(id:string){
         // this.candidate=this.candidate.filter((user)=> user.candidateId!==id )
         return this.candidateModel.findByIdAndDelete(id);
     }
