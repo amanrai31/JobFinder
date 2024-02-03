@@ -3,7 +3,7 @@ import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 @Schema()
 export class Job{
 
-    @Prop({required:true})
+    @Prop({required:[true, "Job title required"]})
     JobTitle: string;
 
     @Prop({required:true})

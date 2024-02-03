@@ -8,22 +8,17 @@ import { Candidate } from "src/schema/candidates.schema";
 
 @Injectable()
 export class CandidateService{
-
-   // private candidate: CandidateDto[] = [];
     
     constructor(@InjectModel(Candidate.name) private candidateModel: Model<Candidate>){}
     
     getCandidates(){ 
       return this.candidateModel.find();
-      //console.log(this.candidate);
-      // return[...this.candidate];
     }
 
     async createCandidate(candidate:CandidateDto) {
+      
         const newCandidate = new this.candidateModel(candidate);
         return newCandidate.save();       //this.candidate.push(candidate); return candidate;
-          
-        // return new this.candidateModel(candidate).save();
 
       }
 

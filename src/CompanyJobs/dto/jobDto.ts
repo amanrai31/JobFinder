@@ -12,4 +12,8 @@ import { IsNotEmpty, IsString } from "class-validator";
 
     @IsNotEmpty()
     tags:[];
+
+    @IsNotEmpty()
+    @IsString()
+    email: string;
 }

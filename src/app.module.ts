@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { jobsModule } from './CompanyJobs/jobs.module';
+import { JobsModule } from './CompanyJobs/jobs.module';
 import { CandidateModule } from './Candidate/candidate.module';
 
 import { MongooseModule } from '@nestjs/mongoose';
@@ -10,7 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/JobFinder'),
-    jobsModule,
+    JobsModule,
     CandidateModule,
   ], // Link modules together, it doesnot import anything
 

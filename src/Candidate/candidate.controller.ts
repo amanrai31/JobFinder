@@ -45,7 +45,7 @@ export class CandidateController {
 
    @Get("/myProfile/:id")
    async getCandidateById(@Param('id') id: string) {
-      const isValid = mongoose.Types.ObjectId.isValid(id);
+      const isValid =  mongoose.Types.ObjectId.isValid(id);
       if (!isValid) throw new HttpException('Candidate not valid', 400);
       const fetchedCandidate= await this.candidateService.getCandidateById(id);
       if(! fetchedCandidate) throw new HttpException('Candidate not fund',404);
