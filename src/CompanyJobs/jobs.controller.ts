@@ -15,7 +15,7 @@ import { UpdateJobDto } from "./dto/updateJobDto";
 import mongoose from "mongoose";
 
 
-@Controller('/jobFinder')
+@Controller('/jobFinder/jobs')
 export class JobsController{
 
     constructor(private readonly jobsService: JobsService) {}
@@ -26,7 +26,7 @@ export class JobsController{
     }
 
     @Post("/createJob")
-    addJob(@Body() jobDto : JobDto): any {                                                                                                      // converts JSON to JS object
+    addJob(@Body(ValidationPipe) jobDto : JobDto): any {                                                                                                      // converts JSON to JS object
      return this.jobsService.createJob(jobDto);
     }
 
@@ -35,7 +35,7 @@ export class JobsController{
 
      const isValid = mongoose.isValidObjectId(id)
      if(!isValid) throw new HttpException('Job ID Invalid', 400);
-     const fetchedJob= this.jobsService.seeJobDetails(id);
+     const fetchedJob= await this.jobsService.seeJobDetails(id);   // if u dont use await here the error will not thrown 
      if(!fetchedJob) throw new HttpException('Job ID not found', 404);
      return fetchedJob;
     }
@@ -45,7 +45,7 @@ export class JobsController{
         //return this.jobsService.updateJob(id);
      const isValid = mongoose.isValidObjectId(id)
      if(!isValid) throw new HttpException('Job ID Invalid', 400);
-     const updatedJob= this.jobsService.updateJob(id,updatejobdto);
+     const updatedJob= await this.jobsService.updateJob(id,updatejobdto);
      if(!updatedJob) throw new HttpException('Job ID not found', 404);
      return updatedJob;
     }
@@ -55,7 +55,7 @@ export class JobsController{
      // return this.jobsService.deleteJob(+id);
      const isValid = mongoose.isValidObjectId(id)
      if(!isValid) throw new HttpException('Job ID Invalid', 400);
-     const deletedJob= this.jobsService.deleteJob(id);
+     const deletedJob= await this.jobsService.deleteJob(id);
      if(!deletedJob) throw new HttpException('Job ID not found', 404);
      return deletedJob;
     }

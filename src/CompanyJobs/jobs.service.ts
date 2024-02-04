@@ -5,7 +5,6 @@ import { Model } from "mongoose";
 import { JobDto } from './dto/jobDto';
 import { UpdateJobDto } from "./dto/updateJobDto";
 import { Job } from "src/schema/jobs.schema";
-//import { CLIENT_RENEG_LIMIT } from "tls";
 
 @Injectable()
 export class JobsService {

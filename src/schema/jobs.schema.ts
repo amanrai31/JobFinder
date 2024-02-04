@@ -4,10 +4,10 @@ import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 export class Job{
 
     @Prop({required:[true, "Job title required"]})
-    JobTitle: string;
+    title: string;
 
     @Prop({required:true})
-    jobLocation:string;
+    location:string;
 
     @Prop({required:true})
     tags:[];

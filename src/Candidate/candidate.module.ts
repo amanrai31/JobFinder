@@ -2,7 +2,6 @@ import { Module } from "@nestjs/common";
 
 import { CandidateController } from "./candidate.controller";
 import { CandidateService } from "./candidate.service";
-import { CandidateDto } from "./dto/candidateDto";
 
 import { MongooseModule } from "@nestjs/mongoose";
 import { Candidate ,CandidateSchema } from "src/schema/candidates.schema";
