@@ -12,7 +12,6 @@ export class JobsService {
   // private jobs: JobDto[];
   // constructor() { this.jobs = [] }               // OR----private jobs: Job[] = [];
   constructor(@InjectModel(Job.name) private jobModel: Model<Job>){}
-  //constructor(@InjectModel(collection.name) private yourModel: Model<Collecction>) {}
 
   getJobs() {
     //return [...this.jobs];  // reference returns, that's why we can't simply return this.jobs
