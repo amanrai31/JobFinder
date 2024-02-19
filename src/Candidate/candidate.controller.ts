@@ -10,6 +10,7 @@ import {
    ParseIntPipe,
    Patch,
    HttpException,
+   Inject,
 } from "@nestjs/common";
 
 import { CandidateService } from "./candidate.service";
@@ -17,10 +18,19 @@ import { CandidateDto } from "./dto/candidateDto";
 import { UpdateCandidateDto } from "./dto/updateCandidateDto";
 import mongoose from "mongoose";
 
+import { CandidateAuthService } from "./candidate.service";
+import { CandidateSignUpDto } from "./dto/candidateSignUpDto";
+
 @Controller('/jobFinder/candidate')
 export class CandidateController {
 
-   constructor(private readonly candidateService: CandidateService) { }
+   private readonly candidateService: CandidateService;
+   private readonly candidateAuthService: CandidateAuthService;
+
+   constructor(@Inject(CandidateService) candidateService: CandidateService, @Inject(CandidateAuthService) candidateAuthService: CandidateAuthService) {
+      this.candidateService = candidateService;
+      this.candidateAuthService = candidateAuthService;
+    }
 
    @Get("/getAll")
    getAllCandidate() {
@@ -61,6 +71,12 @@ export class CandidateController {
       if (!deletedCandidate) throw new HttpException('Candidate not fund', 404);
       return deletedCandidate;
    }
+
+   @Post("/signUp")
+   signup(@Body(ValidationPipe)CandidateSignUpDto: CandidateSignUpDto) {
+    return this.candidateAuthService.signUp(CandidateSignUpDto);
+   }
+
 
 }
 

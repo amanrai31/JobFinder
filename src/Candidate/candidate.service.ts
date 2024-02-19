@@ -6,6 +6,10 @@ import { CandidateDto } from './dto/candidateDto';
 import { UpdateCandidateDto } from './dto/updateCandidateDto';
 import { Candidate } from "src/schema/candidates.schema";
 
+import { CandidateSignUpDto } from './dto/candidateSignUpDto';
+import { CandidateSignUp } from 'src/schema/candidateSignUp.schema';
+//import { UsersService } from '../users/users.service';
+
 @Injectable()
 export class CandidateService {
 
@@ -38,5 +42,20 @@ export class CandidateService {
     return this.candidateModel.findByIdAndDelete(id);
   }
 
+  
+
+}
+
+@Injectable()
+export class CandidateAuthService {
+
+  constructor(@InjectModel(CandidateSignUp.name) private readonly candidateSignUpModel: Model<CandidateSignUp>) {}
+
+  async signUp(candidatesignUpDto: CandidateSignUpDto) {
+    
+    const newCandidate= await this.candidateSignUpModel.create(candidatesignUpDto);
+    return newCandidate;
+
+  }
 
 }

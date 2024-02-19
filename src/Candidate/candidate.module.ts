@@ -1,10 +1,11 @@
 import { Module } from "@nestjs/common";
 
 import { CandidateController } from "./candidate.controller";
-import { CandidateService } from "./candidate.service";
+import { CandidateAuthService, CandidateService } from "./candidate.service";
 
 import { MongooseModule } from "@nestjs/mongoose";
 import { Candidate ,CandidateSchema } from "src/schema/candidates.schema";
+import { CandidateSignUp,CandidateSignUpSchema } from "src/schema/candidateSignUp.schema";
 
 
 @Module({
@@ -12,9 +13,13 @@ import { Candidate ,CandidateSchema } from "src/schema/candidates.schema";
         {name: Candidate.name,
             schema:CandidateSchema,
         },
+    ]), MongooseModule.forFeature([
+        {name: CandidateSignUp.name,
+            schema:CandidateSignUpSchema,
+        },
     ])],
     controllers:[CandidateController],
-    providers: [CandidateService],
+    providers: [CandidateService,CandidateAuthService],
 })
 
 export class CandidateModule{
