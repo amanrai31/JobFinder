@@ -13,7 +13,7 @@ import { CandidateSignUp } from 'src/schema/candidateSignUp.schema';
 @Injectable()
 export class CandidateService {
 
-  constructor(@InjectModel(Candidate.name) private candidateModel: Model<Candidate>) { }
+  constructor(@InjectModel(Candidate.name) private readonly candidateModel: Model<Candidate>) { }
 
   getCandidates() {
     return this.candidateModel.find();
@@ -49,7 +49,7 @@ export class CandidateService {
 @Injectable()
 export class CandidateAuthService {
 
-  constructor(@InjectModel(CandidateSignUp.name) private readonly candidateSignUpModel: Model<CandidateSignUp>) {}
+  constructor(@InjectModel(CandidateSignUp.name) private candidateSignUpModel: Model<CandidateSignUp>) {}
 
   async signUp(candidatesignUpDto: CandidateSignUpDto) {
     
