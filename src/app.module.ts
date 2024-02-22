@@ -7,6 +7,8 @@ import { CandidateModule } from './Candidate/candidate.module';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { MatchModule } from './match/match.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -15,6 +17,7 @@ import { MatchModule } from './match/match.module';
     JobsModule,
     CandidateModule,
     MatchModule,
+    AuthModule,
   ], // Link modules together, it doesnot import anything
 
   controllers: [AppController],
